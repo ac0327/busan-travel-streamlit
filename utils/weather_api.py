@@ -7,10 +7,10 @@ from typing import Optional, Dict
 def get_weather_icon(weathercode: int) -> str:
     """
     根據天氣代碼返回對應的 emoji 圖示
-    
+
     Args:
         weathercode: Open-Meteo 天氣代碼
-        
+
     Returns:
         天氣圖示字串（emoji + 描述）
     """
@@ -46,19 +46,19 @@ def get_weather_icon(weathercode: int) -> str:
 def get_clothing_suggestion(temp_max: float, temp_min: float, precipitation: int) -> str:
     """
     根據溫度和降雨機率提供穿搭建議
-    
+
     Args:
         temp_max: 最高溫度
         temp_min: 最低溫度
         precipitation: 降雨機率
-        
+
     Returns:
         穿搭建議字串
     """
     avg_temp = (temp_max + temp_min) / 2
-    
+
     suggestions = []
-    
+
     # 溫度建議
     if avg_temp < 5:
         suggestions.append("🧥 厚外套、毛衣")
@@ -70,13 +70,13 @@ def get_clothing_suggestion(temp_max: float, temp_min: float, precipitation: int
         suggestions.append("👕 長袖或短袖+薄外套")
     else:
         suggestions.append("👕 短袖")
-    
+
     # 降雨建議
     if precipitation > 50:
         suggestions.append("☔ 雨傘必備")
     elif precipitation > 30:
         suggestions.append("🌂 建議攜帶雨傘")
-    
+
     return "、".join(suggestions)
 
 
@@ -88,13 +88,13 @@ def fetch_weather_data(
 ) -> Optional[Dict]:
     """
     從 Open-Meteo API 獲取天氣預報資料
-    
+
     Args:
         latitude: 緯度（預設釜山）
         longitude: 經度（預設釜山）
         start_date: 開始日期 (YYYY-MM-DD)
         end_date: 結束日期 (YYYY-MM-DD)
-        
+
     Returns:
         天氣資料字典，如果失敗則返回 None
     """
@@ -107,7 +107,7 @@ def fetch_weather_data(
         'start_date': start_date,
         'end_date': end_date
     }
-    
+
     try:
         response = requests.get(url, params=params, timeout=10)
         response.raise_for_status()

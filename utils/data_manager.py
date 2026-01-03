@@ -8,7 +8,7 @@ from typing import List, Dict
 def initialize_expenses_state(st_session_state):
     """
     初始化 session state 中的支出資料
-    
+
     Args:
         st_session_state: Streamlit session state 物件
     """
@@ -26,7 +26,7 @@ def add_expense(
 ):
     """
     新增支出記錄
-    
+
     Args:
         st_session_state: Streamlit session state 物件
         date: 日期
@@ -48,7 +48,7 @@ def add_expense(
 def delete_expense(st_session_state, index: int):
     """
     刪除支出記錄
-    
+
     Args:
         st_session_state: Streamlit session state 物件
         index: 要刪除的記錄索引
@@ -60,7 +60,7 @@ def delete_expense(st_session_state, index: int):
 def clear_all_expenses(st_session_state):
     """
     清空所有支出記錄
-    
+
     Args:
         st_session_state: Streamlit session state 物件
     """
@@ -70,16 +70,16 @@ def clear_all_expenses(st_session_state):
 def get_expenses_dataframe(expenses: List[Dict]) -> pd.DataFrame:
     """
     將支出列表轉換為 DataFrame
-    
+
     Args:
         expenses: 支出記錄列表
-        
+
     Returns:
         Pandas DataFrame
     """
     if not expenses:
         return pd.DataFrame(columns=['日期', '分類', '金額(KRW)', '金額(TWD)', '備註'])
-    
+
     df = pd.DataFrame(expenses)
     df = df.rename(columns={
         'date': '日期',
@@ -88,27 +88,27 @@ def get_expenses_dataframe(expenses: List[Dict]) -> pd.DataFrame:
         'amount_twd': '金額(TWD)',
         'note': '備註'
     })
-    
+
     # 格式化金額顯示
     df['金額(KRW)'] = df['金額(KRW)'].apply(lambda x: f"₩{x:,.0f}")
     df['金額(TWD)'] = df['金額(TWD)'].apply(lambda x: f"NT${x:,.0f}")
-    
+
     return df
 
 
 def get_expenses_csv(expenses: List[Dict]) -> str:
     """
     將支出資料轉換為 CSV 格式
-    
+
     Args:
         expenses: 支出記錄列表
-        
+
     Returns:
         CSV 格式字串
     """
     if not expenses:
         return "日期,分類,金額(KRW),金額(TWD),備註\n"
-    
+
     df = pd.DataFrame(expenses)
     return df.to_csv(index=False, encoding='utf-8-sig')
 
@@ -116,10 +116,10 @@ def get_expenses_csv(expenses: List[Dict]) -> str:
 def calculate_statistics(expenses: List[Dict]) -> Dict:
     """
     計算支出統計資料
-    
+
     Args:
         expenses: 支出記錄列表
-        
+
     Returns:
         包含統計資料的字典
     """
@@ -132,16 +132,16 @@ def calculate_statistics(expenses: List[Dict]) -> Dict:
             'by_category': {},
             'by_date': {}
         }
-    
+
     df = pd.DataFrame(expenses)
-    
+
     stats = {
         'total_krw': df['amount_krw'].sum(),
         'total_twd': df['amount_twd'].sum(),
         'by_category': df.groupby('category')['amount_krw'].sum().to_dict(),
         'by_date': df.groupby('date')['amount_krw'].sum().to_dict()
     }
-    
+
     # 計算平均每日支出
     unique_dates = df['date'].nunique()
     if unique_dates > 0:
@@ -150,5 +150,5 @@ def calculate_statistics(expenses: List[Dict]) -> Dict:
     else:
         stats['avg_daily_krw'] = 0
         stats['avg_daily_twd'] = 0
-    
+
     return stats

@@ -33,7 +33,7 @@ with col2:
     st.subheader("⏳ 倒數計時")
     today = datetime.now()
     days_until = (TRIP_START - today).days
-    
+
     if days_until > 0:
         st.success(f"🎉 距離出發還有 **{days_until}** 天！")
     elif days_until == 0:
@@ -78,7 +78,7 @@ st.subheader("📍 今日行程預覽")
 today_date = datetime.now()
 if TRIP_START <= today_date <= TRIP_END:
     from data.itinerary import ITINERARY
-    
+
     date_key = today_date.strftime("%Y-%m-%d")
     if date_key in ITINERARY:
         day_info = ITINERARY[date_key]
