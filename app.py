@@ -1,5 +1,5 @@
 """
-🇰🇷 釜山旅遊助手 - 主頁面
+2026 BUSAN TRAVEL
 """
 
 import streamlit as st
@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 # 設定頁面配置
 st.set_page_config(
-    page_title="釜山旅遊助手",
+    page_title="2026 BUSAN",
     page_icon="🇰🇷",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -20,7 +20,7 @@ TOTAL_DAYS = 6
 TOTAL_NIGHTS = 5
 
 # 主標題
-st.title("🇰🇷 釜山旅遊助手")
+st.title("2026 BUSAN TRAVE")
 st.markdown("---")
 
 # 旅程日期
