@@ -43,7 +43,7 @@ def get_weather_icon(weathercode: int) -> str:
     return weather_icons.get(weathercode, '🌤️ 多雲')
 
 
-def get_clothing_suggestion(temp_max: float, temp_min: float, precipitation: int) -> str:
+def get_clothing_suggestion(temp_max: float, temp_min: float, precipitation: float) -> str:
     """
     根據溫度和降雨機率提供穿搭建議
 
