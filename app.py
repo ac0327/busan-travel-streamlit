@@ -20,7 +20,7 @@ TOTAL_DAYS = 6
 TOTAL_NIGHTS = 5
 
 # 主標題
-st.title("2026 BUSAN TRAVE")
+st.title("2026 BUSAN TRAVEL")
 st.markdown("---")
 
 # 旅程日期
