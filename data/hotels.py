@@ -29,13 +29,13 @@ BUSAN_PASS = {
         {
             "name": "Club d spa",
             "name_korean": "클럽디스파",
-            "hours": "待確認"
+            "hours": "09:00-21:00"
         }
     ],
     "B區景點": [
         {
-            "name": "ARTE 美術館",
-            "name_korean": "아르떼뮤지엄",
+            "name": "ARTE Museum Busan",
+            "name_korean": "아르떼뮤지엄 부산",
             "hours": "10:00-20:00"
         },
         {

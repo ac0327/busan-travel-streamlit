@@ -82,13 +82,60 @@ if TRIP_START <= today_date <= TRIP_END:
     date_key = today_date.strftime("%Y-%m-%d")
     if date_key in ITINERARY:
         day_info = ITINERARY[date_key]
-        st.success(f"**{day_info['day']} - {day_info['date']}**")
-        for item in day_info['items']:
-            st.write(f"• {item}")
+        st.success(f"**{date_key} ({day_info['day']}) - {day_info['title']}**")
+        
+        # 顯示詳細時間表
+        for activity in day_info['activities']:
+            col1, col2 = st.columns([1, 5])
+            with col1:
+                st.write(f"{activity['icon']}")
+            with col2:
+                st.write(f"**{activity['time']}** - {activity['title']}")
+                if activity.get('details'):
+                    for detail in activity['details']:
+                        st.caption(f"• {detail}")
     else:
         st.info("今天沒有特別安排的行程")
 else:
     st.info("目前不在旅程期間，請使用左側選單查看完整行程")
+
+st.markdown("---")
+
+# 交通提示
+st.subheader("🚇 交通提示")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.info("""
+    **常用地鐵路線**
+    
+    🔹 **金海機場 ↔ 西面**
+    - 輕軌至「沙上站」→ 地鐵2號線至「西面站」
+    - 時間：約 40-50 分鐘
+    
+    🔹 **西面 ↔ 海雲台**
+    - 地鐵2號線直達
+    - 時間：約 30 分鐘
+    
+    🔹 **海雲台 ↔ 廣安里**
+    - 地鐵2號線（廣安站下車）
+    - 時間：約 15 分鐘
+    """)
+
+with col2:
+    st.success("""
+    **T-Money 卡使用**
+    
+    ✅ 可在便利商店購買
+    ✅ 地鐵、公車通用
+    ✅ 轉乘有優惠
+    ✅ 便利商店也可使用
+    
+    💰 **地鐵費用參考**
+    - 基本票價：約 1,500 KRW
+    - 使用 T-Money 有折扣
+    """)
 
 st.markdown("---")
 
